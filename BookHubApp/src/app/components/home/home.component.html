@@ -10,8 +10,7 @@
   </div>
   <ul>
     <li *ngFor="let book of books">
-      <strong>{{ book.title }}</strong> by {{ book.author.name }}
+      <a [routerLink]="['/book', book.id]"><strong>{{ book.title }}</strong></a> by {{ book.author.name }}
     </li>
   </ul>
 </div>
-
