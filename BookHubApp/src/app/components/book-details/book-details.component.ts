@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';  // Import CommonModule
 import { BookService } from '../../services/book.service';
 
+
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
@@ -12,6 +13,7 @@ import { BookService } from '../../services/book.service';
 })
 export class BookDetailsComponent implements OnInit {
   book: any;
+
 
   constructor(private route: ActivatedRoute, private bookService: BookService) { }
 

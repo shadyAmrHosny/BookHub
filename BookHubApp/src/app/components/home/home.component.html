@@ -1,16 +1,57 @@
-<div>
-  <h2>Book List</h2>
-  <div>
-    <input [(ngModel)]="title" placeholder="Search by title">
-    <button (click)="searchByTitle()">Search</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book List</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .btn-logout {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<div class="home container mt-5">
+
+  <h2 class="mb-4">Book List</h2>
+
+  <div class="mb-3 row">
+    <div class="col-sm-8">
+      <input [(ngModel)]="title" class="form-control" placeholder="Search by title">
+    </div>
+    <div class="col-sm-4">
+      <button (click)="searchByTitle()" class="btn btn-primary w-100">Search</button>
+    </div>
   </div>
-  <div>
-    <input [(ngModel)]="author" placeholder="Search by author">
-    <button (click)="searchByAuthor()">Search</button>
+
+  <div class="mb-4 row">
+    <div class="col-sm-8">
+      <input [(ngModel)]="author" class="form-control" placeholder="Search by author">
+    </div>
+    <div class="col-sm-4">
+      <button (click)="searchByAuthor()" class="btn btn-primary w-100">Search</button>
+    </div>
   </div>
-  <ul>
-    <li *ngFor="let book of books">
-      <a [routerLink]="['/book', book.id]"><strong>{{ book.title }}</strong></a> by {{ book.author.name }}
-    </li>
-  </ul>
+
+  <div class="list">
+    <ul class="list-group mb-4">
+      <li *ngFor="let book of books" class="list-group-item">
+        <a [routerLink]="['/book', book.id]"><strong>{{ book.title }}</strong></a> by {{ book.author.name }}
+      </li>
+    </ul>
+    <a [routerLink]="['/authors']" class="btn btn-secondary">Authors</a>
+  </div>
+
+  <div class="text-center mt-4">
+    <button (click)="logout()" class="btn btn-logout">Logout</button>
+  </div>
+
 </div>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

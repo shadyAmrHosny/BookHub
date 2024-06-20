@@ -4,8 +4,10 @@ const cors=require('cors');
 
 const AppError = require('./utils/AppError');
 const globalErrorHandler = require('./controllers/errorController');
+const AuthRouter = require('./routes/authRouter');
 const AuthorRouter = require('./routes/authorRouter');
 const BookRouter = require('./routes/bookRouter');
+const cookieParser = require('cookie-parser');
 
 
 const app = express();
@@ -17,6 +19,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();
@@ -24,6 +27,7 @@ app.use((req, res, next) => {
 });
 
 // 3) ROUTES
+app.use('/api/v1/auth', AuthRouter);
 app.use('/api/v1/authors', AuthorRouter);
 app.use('/api/v1/books', BookRouter);
 

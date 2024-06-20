@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authors</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <h2 class="mb-4">Authors</h2>
+  <a [routerLink]="['/authors/add']" class="btn btn-primary mb-3">Add Author</a>
+  <ul class="list-group mb-4">
+    <li *ngFor="let author of authors" class="list-group-item">
+      <a [routerLink]="['/authors/', author.id]"><strong>{{author.name}}</strong></a>
+    </li>
+  </ul>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <button (click)="previousPage()" [disabled]="currentPage === 1" class="btn btn-secondary">Previous</button>
+    <span>Page {{currentPage}} of {{Math.ceil(totalItems / pageSize)}}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === Math.ceil(totalItems / pageSize)" class="btn btn-secondary">Next</button>
+  </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,10 +1,15 @@
-// bookModel.js
 
 module.exports = (sequelize, DataTypes) => {
     const Book = sequelize.define('book', {
         title: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                len: {
+                    args: [3],
+                    msg: 'Title must be at least 3 characters long'
+                }
+            }
         },
         description: {
             type: DataTypes.TEXT,
@@ -18,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     Book.associate = (models) => {
         Book.belongsTo(models.authors, {
             foreignKey: 'authorId',
-            as: 'author' // Alias
+            as: 'author'
         });
     };
 

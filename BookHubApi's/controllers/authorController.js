@@ -4,6 +4,7 @@ const { getPagination, getPagingData } = require('../utils/pagination');
 const db=require('../models')
 Author=db.authors
 Book=db.books
+sequelize=db.sequelize
 
 exports.addAuthor = catchAsync(async (req, res) => {
 
@@ -57,8 +58,20 @@ exports.updateAuthor = async (req, res, next) => {
     res.status(200).send(author)
 }
 
-exports.deleteAuthor =catchAsync( async (req, res,next) => {
-    let id = req.params.id
-    if (!await Author.destroy({ where: { id: id }} )) return next(new AppError('no author found',404))
-    res.status(200).send('Author is deleted !')
-})
+exports.deleteAuthor = catchAsync(async (req, res, next) => {
+    const id = req.params.id;
+    const transaction = await sequelize.transaction();
+    try {
+        const author = await Author.findByPk(id);
+        if (!author) {
+            return next(new AppError('No author found', 404));
+        }
+        await Book.destroy({ where: { authorId: id } }, { transaction });
+        await Author.destroy({ where: { id: id } }, { transaction });
+        await transaction.commit();
+        res.status(200).send('Author and associated books are deleted!');
+    } catch (error) {
+        await transaction.rollback();
+        return next(new AppError('Failed to delete author and associated books', 500));
+    }
+});

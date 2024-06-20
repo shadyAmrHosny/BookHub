@@ -46,7 +46,6 @@ db.sequelize.sync({ force: false })
 
 
 
-// 1 to Many Relation
 db.authors.hasMany(db.books, {
     foreignKey: 'authorId',
     as: 'books'

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Book System</title>
+
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+</head>
+<body>
+<form (ngSubmit)="addAuthor()">
+  <table style="width: 400px; height: 200px">
+    <tr>
+      <td>Name</td>
+      <td>
+        <input type="text" name="name" id="name" [(ngModel)]="newAuthor.name" />
+      </td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>
+        <input type="text" name="email" id="email" [(ngModel)]="newAuthor.email" />
+      </td>
+    </tr>
+    <tr>
+      <td>Bio</td>
+      <td>
+        <input type="text" name="bio" id="bio" [(ngModel)]="newAuthor.bio" />
+      </td>
+    </tr>
+
+    <br />
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      style="margin-left: 150px; width: 50%"
+    >
+      Add Author
+    </button>
+  </table>
+</form>
+
+</body>
+</html>
